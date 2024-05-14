@@ -1,0 +1,20 @@
+Товар (Product):
+sku (VARCHAR(255)) - Уникальный идентификатор товара (primary key).
+title (VARCHAR(255)) - Наименование товара.
+
+Категория товара (Category):
+slug (VARCHAR(255)) - Уникальное поле категории (primary key).
+title (VARCHAR(255)) - Наименование категории.
+
+Склад (Warehouse):
+uuid (UUID) - Уникальный идентификатор склада (primary key).
+title (VARCHAR(255)) - Наименование склада.
+
+Связь между товаром и категорией (Product_Category):
+product_sku (VARCHAR(255)) - Внешний ключ, ссылающийся на sku в таблице Product.
+category_slug (VARCHAR(255)) - Внешний ключ, ссылающийся на slug в таблице Category.
+
+Связь между товаром и складом (Product_Warehouse):
+product_sku (VARCHAR(255)) - Внешний ключ, ссылающийся на sku в таблице Product.
+warehouse_uuid (UUID) - Внешний ключ, ссылающийся на uuid в таблице Warehouse.
+quantity (INT) - Количество товара на складе.
