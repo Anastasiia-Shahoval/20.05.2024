@@ -1,0 +1,43 @@
+import React, { useState, useEffect } from 'react';
+import { ReactDOM } from 'react-dom';
+import './Modal.css';
+
+const Modal = ({ children, open, disableGlobalScroll }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      if (disableGlobalScroll) {
+        document.body.style.overflow = 'hidden';
+      }
+
+      const modalRoot = document.createElement('div');
+      modalRoot.id = 'modal-root';
+      document.body.appendChild(modalRoot);
+      setIsMounted(true);
+    } else {
+      if (disableGlobalScroll) {
+        document.body.style.overflow = 'auto';
+      }
+
+      if (isMounted) {
+        const modalRoot = document.getElementById('modal-root');
+        document.body.removeChild(modalRoot);
+        setIsMounted(false);
+      }
+    }
+  }, [open, disableGlobalScroll]);
+
+  if (!isMounted) return null;
+
+  return ReactDOM.createPortal(
+    <div className={`modal ${open ? 'active' : ''}`}>
+      <div className="modal-content">
+        {children}
+      </div>
+    </div>,
+    document.getElementById('modal-root')
+  );
+};
+
+export default Modal;
