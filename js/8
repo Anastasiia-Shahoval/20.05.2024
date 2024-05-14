@@ -1,1 +1,13 @@
+String.prototype.removeDuplicate = function() {
+  let result = "";
+  const seen = new Set();
 
+  for (const word of this.split(" ")) {
+    if (!seen.has(word)) {
+      result += word + " ";
+      seen.add(word);
+    }
+  }
+
+  return result.trim();
+};
