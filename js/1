@@ -1,1 +1,18 @@
+function nodeChildCount(node, deep = Infinity) {
+  let count = 0;
 
+  function traverse(currentNode, currentDepth) {
+    if (currentDepth === deep) {
+      return;
+    }
+
+    count += currentNode.childNodes.length;
+
+    for (const child of currentNode.childNodes) {
+      traverse(child, currentDepth + 1);
+    }
+  }
+
+  traverse(node, 0);
+  return count;
+}
