@@ -1,0 +1,32 @@
+import React, { useState } from 'react';
+
+const CensoredText = ({ badWords, text }) => {
+  const [censoredText, setCensoredText] = useState(censorText(text, badWords));
+
+  const handleWordClick = (originalWord) => {
+    setCensoredText(text.replace(new RegExp(`\\b${originalWord}\\b`, 'g'), originalWord));
+  };
+
+  return (
+    <span>
+      {censoredText.split(' ').map((word) => (
+        <span key={word}>
+          {badWords.includes(word) ? (
+            <span onClick={() => handleWordClick(word)}>
+              {'*'.repeat(word.length)}
+            </span>
+          ) : (
+            <span>{word} </span>
+          )}
+        </span>
+      ))}
+    </span>
+  );
+};
+
+function censorText(text, badWords) {
+  const regex = new RegExp(`\\b(${badWords.join('|')})\\b`, 'g');
+  return text.replace(regex, '*'.repeat);
+}
+
+export default CensoredText;
