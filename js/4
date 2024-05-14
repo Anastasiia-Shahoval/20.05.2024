@@ -1,1 +1,13 @@
+function mapper(mapRules) {
+  return function transformData(data) {
+    const transformedData = {};
 
+    for (const [sourceField, targetField, transformFn] of mapRules) {
+      const value = data[sourceField];
+      const transformedValue = transformFn ? transformFn(value) : value;
+      transformedData[targetField] = transformedValue;
+    }
+
+    return transformedData;
+  };
+}
