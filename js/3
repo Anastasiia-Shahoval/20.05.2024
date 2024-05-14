@@ -1,1 +1,17 @@
+async function bulkRun(functionsWithArgs) {
+  const results = [];
 
+  for (const [func, args] of functionsWithArgs) {
+    const result = await new Promise((resolve, reject) => {
+      try {
+        func(...args, (data) => resolve(data));
+      } catch (error) {
+        reject(error);
+      }
+    });
+
+    results.push(result);
+  }
+
+  return results;
+}
