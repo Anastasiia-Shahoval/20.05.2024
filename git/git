@@ -1,0 +1,14 @@
+1. Обновление ветки task_4 до актуального состояния ветки dev:
+Bash command:
+git fetch origin
+git merge origin/dev
+
+2. Git проверит наличие конфликтов слияния между ветками task_4 и dev.
+При наличии конфликтов нужно вручную их исправить в проблемных файлах.
+После этого Bash command:
+git add <файлы>
+git commit -m "Объединение изменений из dev в task_4"
+
+3. Отправка обновлённой ветки task_4 в удалённый репозиторий:
+Bash command:
+git push origin task_4
