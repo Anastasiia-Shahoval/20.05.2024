@@ -1,1 +1,17 @@
-
+function reliableMultiply(a, b) {
+  while (true) {
+    try {
+      return primitiveMultiply(a, b);
+    } catch (error) {
+      if (error instanceof NotificationException) {
+        console.error('NotificationException: Повторяем попытку...');
+      } else if (error instanceof ErrorException) {
+        console.error('ErrorException: Операция прервана.');
+        throw error;
+      } else {
+        console.error('Неожиданная ошибка:', error);
+        throw error;
+      }
+    }
+  }
+}
