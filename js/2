@@ -1,1 +1,21 @@
+function chunkArray(array, chunkSize) {
+  let i = 0;
+  const chunks = [];
 
+  while (i < array.length) {
+    const chunk = array.slice(i, i + chunkSize);
+    chunks.push(chunk);
+    i += chunkSize;
+  }
+
+  return {
+    next: function() {
+      if (chunks.length === 0) {
+        return { value: undefined, done: true };
+      }
+
+      const nextChunk = chunks.shift();
+      return { value: nextChunk, done: false };
+    }
+  };
+}
